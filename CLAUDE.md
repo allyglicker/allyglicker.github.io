@@ -5,7 +5,7 @@ A personal portfolio site for Ally Glicker, built for the Grace Hopper Celebrati
 Recruiters will open it on their phones in the middle of a career-fair conversation, so it has to load fast,
 work perfectly on mobile, and get to the point in 30 seconds.
 
-Hosted on GitHub Pages at `https://<github-username>.github.io`.
+Hosted on GitHub Pages at `https://allyglicker.github.io` (repo: `allyglicker/allyglicker.github.io`).
 
 ## Hard rules
 - Plain HTML, CSS, and vanilla JavaScript only. No frameworks, no build step, no npm. Ally needs to be
@@ -62,7 +62,7 @@ Each section except Contact also gets a reflection block (ALLY WRITES).
 **Name:** Ally Glicker
 **Email:** allyglicker@gmail.com
 **LinkedIn:** https://linkedin.com/in/ally-glicker-306a60294
-**GitHub:** [ALLY ADDS]
+**GitHub:** https://github.com/allyglicker
 **Location:** Georgia
 
 **Education**
