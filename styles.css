@@ -1,0 +1,365 @@
+/* =========================================================
+   Ally Glicker — portfolio styles
+   Mobile-first: the base rules are for phones (~375px).
+   The @media blocks at the bottom add layout for wider screens.
+   ========================================================= */
+
+/* ---------- Brand tokens (swap in exact hex values from the brand guide) ---------- */
+:root {
+  --green: #4F6F63;     /* primary accent: links, button, rules */
+  --sage: #A9BFB3;      /* borders and tags only — too light for text on cream */
+  --cream: #F5F4EE;     /* page background */
+  --charcoal: #2E3133;  /* body text */
+  --white: #FFFFFF;
+  --muted: #686B6D;     /* placeholder text; still passes AA contrast on cream */
+
+  --serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  --gutter: 20px;
+  --max: 1080px;
+  --header-h: 56px;
+}
+
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Smooth scrolling for nav links, but only for people who haven't asked for less motion */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--charcoal);
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  line-height: 1.15;
+  margin: 0;
+}
+
+h2 { font-size: 2rem; margin-bottom: 1.5rem; }
+h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+
+p { margin: 0 0 1rem; }
+
+a { color: var(--green); text-underline-offset: 3px; }
+a:hover { color: var(--charcoal); }
+
+img { max-width: 100%; height: auto; display: block; }
+
+/* Visible keyboard focus everywhere */
+:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Keeps section headings from hiding under the sticky header after a nav jump */
+[id] { scroll-margin-top: calc(var(--header-h) + 12px); }
+
+.skip-link {
+  position: absolute;
+  left: 8px;
+  top: -48px;
+  background: var(--charcoal);
+  color: var(--cream);
+  padding: 8px 12px;
+  z-index: 100;
+}
+.skip-link:focus { top: 8px; }
+
+/* ---------- Placeholders (Ally's own words go here) ---------- */
+.placeholder {
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* ---------- Header + navigation ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--header-h);
+  padding: 0 var(--gutter);
+  background: var(--cream);
+  border-bottom: 1px solid var(--sage);
+}
+
+.site-name {
+  font-family: var(--serif);
+  font-size: 1.125rem;
+  color: var(--charcoal);
+  text-decoration: none;
+}
+
+.nav-toggle {
+  display: none; /* only shown once script.js confirms JavaScript is running */
+  font: inherit;
+  font-size: 0.9375rem;
+  color: var(--charcoal);
+  background: none;
+  border: 1px solid var(--charcoal);
+  border-radius: 4px;
+  padding: 6px 14px;
+  cursor: pointer;
+}
+
+.site-nav { width: 100%; }
+
+.site-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+}
+
+.site-nav a {
+  display: inline-block;
+  padding: 6px 0;
+  color: var(--charcoal);
+  text-decoration: none;
+}
+.site-nav a:hover { color: var(--green); text-decoration: underline; }
+
+/* With JavaScript: collapse the menu behind the toggle button on phones */
+.js .nav-toggle { display: block; }
+.js .site-nav { display: none; }
+.js .site-nav.is-open { display: block; }
+.js .site-nav ul { flex-direction: column; gap: 0; }
+.js .site-nav a { padding: 10px 0; }
+
+/* ---------- Hero (the one memorable element) ---------- */
+.hero {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 40px var(--gutter) 48px;
+  display: grid;
+  gap: 32px;
+}
+
+.hero h1 {
+  font-size: clamp(4rem, 22vw, 9rem);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+}
+
+.hero-line {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 2px solid var(--green);
+  font-size: 1.0625rem;
+  max-width: 34ch;
+}
+
+.hero-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+}
+.hero-links a { font-weight: 500; }
+
+.headshot {
+  width: 100%;
+  max-width: 200px;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  background: var(--sage); /* shows as a calm block until the photo is added */
+  color: var(--charcoal);   /* alt text color if the image is missing */
+}
+
+/* ---------- Sections ---------- */
+.section {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 56px var(--gutter);
+  border-top: 1px solid var(--sage);
+}
+
+.prose { max-width: 62ch; }
+.prose h3 { margin-top: 1.75rem; }
+
+.plain { list-style: none; margin: 0; padding: 0; }
+.plain li { margin-bottom: 1rem; }
+
+.facts {
+  display: grid;
+  gap: 32px;
+  margin-top: 40px;
+}
+
+.meta {
+  font-size: 0.9375rem;
+  color: var(--charcoal);
+  opacity: 0.85;
+}
+
+/* Reflections sit apart from the facts, marked by a green rule */
+.reflection {
+  margin-top: 40px;
+  padding-left: 18px;
+  border-left: 3px solid var(--green);
+  max-width: 62ch;
+  font-family: var(--serif);
+  font-size: 1.125rem;
+}
+.reflection p:last-child { margin-bottom: 0; }
+
+/* ---------- Skills ---------- */
+.skills { margin: 0; display: grid; gap: 24px; }
+.skills dt { font-family: var(--serif); font-size: 1.25rem; margin-bottom: 8px; }
+.skills dd { margin: 0; }
+
+.tags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.tags li {
+  border: 1px solid var(--sage);
+  border-radius: 999px;
+  padding: 3px 12px;
+  font-size: 0.9375rem;
+}
+
+/* ---------- Projects ---------- */
+.project {
+  padding: 28px 0;
+  border-bottom: 1px solid var(--sage);
+}
+.project:first-of-type { padding-top: 0; }
+.project-head .meta { margin-bottom: 12px; }
+.project-body p:last-child { margin-bottom: 0; }
+
+/* ---------- Certifications ---------- */
+.certs { list-style: none; margin: 0; padding: 0; display: grid; gap: 32px; }
+
+.cert {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.badge-slot {
+  width: 72px;
+  height: 72px;
+  display: grid;
+  place-items: center;
+  border: 1px dashed var(--sage);
+  font-size: 0.8125rem;
+}
+
+/* ---------- Spotlight ---------- */
+.spotlight-name {
+  font-family: var(--serif);
+  font-size: 1.375rem;
+}
+
+/* ---------- Contact ---------- */
+.contact-list { list-style: none; margin: 0 0 28px; padding: 0; }
+.contact-list li {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: 8px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--sage);
+  overflow-wrap: anywhere; /* long LinkedIn URL wraps instead of overflowing */
+}
+.contact-list span:first-child { color: var(--muted); }
+
+.button {
+  display: inline-block;
+  background: var(--green);
+  color: var(--cream);
+  text-decoration: none;
+  padding: 12px 20px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+.button:hover { background: var(--charcoal); color: var(--cream); }
+
+.resume-embed { display: none; }
+
+.site-footer {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 24px var(--gutter) 40px;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+/* =========================================================
+   Wider screens
+   ========================================================= */
+@media (min-width: 760px) {
+  :root { --gutter: 40px; }
+
+  /* Nav sits inline; no toggle needed */
+  .site-header { flex-wrap: nowrap; }
+  .js .nav-toggle,
+  .nav-toggle { display: none; }
+  .site-nav,
+  .js .site-nav { display: block; width: auto; }
+  .site-nav ul,
+  .js .site-nav ul { flex-direction: row; padding: 0; gap: 24px; }
+  .js .site-nav a { padding: 6px 0; }
+
+  .hero {
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+  .headshot { max-width: 300px; }
+
+  .facts { grid-template-columns: repeat(3, 1fr); }
+
+  .skills > div {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 24px;
+  }
+
+  /* Project title on the left, details on the right */
+  .project {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 40px;
+  }
+
+  .certs { grid-template-columns: 1fr 1fr; }
+
+  .resume-embed {
+    display: block;
+    width: 100%;
+    height: 80vh;
+    border: 1px solid var(--sage);
+    background: var(--white);
+  }
+}
